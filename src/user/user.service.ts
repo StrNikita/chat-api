@@ -36,6 +36,6 @@ export class UserService {
   }
 
   public async delete(id: string) {
-    await this.userRepository.softDelete(id);
+    await this.userRepository.delete(id);
   }
 }
