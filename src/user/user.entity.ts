@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Chat } from '../chat/chat.entity';
+import { Message } from '../message/message.entity';
 
 @Entity('users')
 export class User {
@@ -16,4 +18,13 @@ export class User {
 
   @Column({ default: false })
   public isOnline: boolean;
+
+  @OneToMany(() => Chat, (chat) => chat.initiator)
+  chats: Chat[];
+
+  @OneToMany(() => Chat, (chat) => chat.participant)
+  participant: Chat[];
+
+  @OneToMany(() => Message, (chat) => chat.sender)
+  messages: Message[];
 }
